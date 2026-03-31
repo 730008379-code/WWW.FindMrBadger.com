@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Find Mr. Badger</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Georgia, serif;
+      background: #f5f5f5;
+      text-align: center;
+      color: #222;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      padding: 20px;
+      cursor: pointer;
+    }
+
+    h1 {
+      font-size: 60px;
+      margin: 0;
+      letter-spacing: 3px;
+    }
+
+    h2 {
+      margin-top: 10px;
+      font-weight: normal;
+    }
+
+    .poster {
+      margin: 30px auto;
+      max-width: 600px;
+    }
+
+    .poster img {
+      width: 100%;
+      border: 5px solid #333;
+    }
+
+    .description {
+      max-width: 700px;
+      margin: 20px auto;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .counter {
+      font-size: 22px;
+      margin-top: 15px;
+      color: #8b4513;
+      font-weight: bold;
+    }
+
+    button {
+      background: #c0392b;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      font-size: 18px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    button:hover {
+      background: #e74c3c;
+    }
+
+    .quotes {
+      font-style: italic;
+      margin-top: 30px;
+      color: #444;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      background: #111;
+      color: white;
+    }
+
+    .hidden {
+      display: none;
+      margin-top: 20px;
+      color: #555;
+      font-style: italic;
+    }
+  </style>
+</head>
+
+<body>
+
+<header onclick="secretMessage()">
+  <h1>MISSING</h1>
+  <h2>Lahr Christian Badger</h2>
+</header>
+
+<div class="poster">
+  <img src="MISSING.png">
+</div>
+
+<div class="description">
+  <p>
+    Last seen drinking his daily 19th cup of coffee/tea on 3/31/2025.
+    Students around campus dearly miss Mr. Badger.
+  </p>
+
+  <p>If you can find him, you will be rewarded with bragging rights.</p>
+
+  <div class="counter" id="timeMissing"></div>
+  <div class="counter" id="coffeeCount"></div>
+
+  <button onclick="playSlurp()">☕ Play Coffee Slurp</button>
+  <button onclick="fakeReport()">Report a Sighting</button>
+
+  <div class="quotes">
+    <p>“Ever since he's been missing there's no one to take care of his Pokemon” – James Dong</p>
+    <p>“Who will ‘accidentally’ dump the whole sugar packet in their coffee?” – Aiden Johnson</p>
+  </div>
+
+  <div id="secret" class="hidden">
+    Rumor has it he transcended into pure caffeine.
+  </div>
+</div>
+
+<footer>
+  © FindMrBadger.co | Caffeine Investigation Unit
+</footer>
+
+<!-- SOUND -->
+<audio id="slurpSound">
+  <source src="https://www.soundjay.com/drink/sounds/drinking-sip-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  // TIME SINCE MISSING
+  const lastSeen = new Date("March 31, 2025 00:00:00").getTime();
+
+  function updateTime() {
+    const now = new Date().getTime();
+    const diff = now - lastSeen;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+
+    document.getElementById("timeMissing").innerText =
+      "Missing for: " + days + " days and " + hours + " hours";
+  }
+
+  setInterval(updateTime, 1000);
+  updateTime();
+
+  // COFFEE COUNTER (ASSUMES 19/day STILL)
+  function updateCoffee() {
+    const now = new Date().getTime();
+    const diff = now - lastSeen;
+
+    const days = diff / (1000 * 60 * 60 * 24);
+    const coffees = Math.floor(days * 19);
+
+    document.getElementById("coffeeCount").innerText =
+      "Estimated coffees missed: " + coffees;
+  }
+
+  setInterval(updateCoffee, 2000);
+  updateCoffee();
+
+  // SOUND
+  function playSlurp() {
+    document.getElementById("slurpSound").play();
+  }
+
+  // FAKE REPORT
+  function fakeReport() {
+    alert("Report logged. Investigation ongoing. Stay caffeinated.");
+  }
+
+  // SECRET EASTER EGG
+  function secretMessage() {
+    const secret = document.getElementById("secret");
+    secret.style.display = secret.style.display === "none" ? "block" : "none";
+  }
+
+  // RANDOM POPUP EASTER EGG
+  setTimeout(() => {
+    alert("☕ ALERT: A coffee cup was spotted unattended...");
+  }, 8000);
+
+</script>
+
+</body>
+</html>
